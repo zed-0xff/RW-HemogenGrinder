@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <Operation Class="PatchOperationAttributeAdd">
+    <xpath>Defs/ThingDef[defName="VNPE_NutrientPasteGrinder"]</xpath>
+    <value>VNPE_NutrientPasteGrinder</value>
+    <attribute>Name</attribute>
+    <success>Always</success>
+  </Operation>
+
+  <!-- add shader type to original texture, we'll use it later in Hemogen Grinder -->
+  <!-- should not change original's appearance -->
+  <Operation Class="PatchOperationAdd">
+    <xpath>Defs/ThingDef[defName="VNPE_NutrientPasteGrinder"]/graphicData</xpath>
+    <value>
+      <shaderType>CutoutComplex</shaderType>
+    </value>
+  </Operation>
+
+</Patch>

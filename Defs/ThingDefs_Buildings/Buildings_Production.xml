@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+  <DesignatorDropdownGroupDef>
+    <defName>HemogenGrinder</defName>
+  </DesignatorDropdownGroupDef>
+
+  <ThingDef ParentName="VNPE_NutrientPasteGrinder" Name="HemogenGrinder">
+    <designationCategory>Biotech</designationCategory>
+    <designatorDropdown>HemogenGrinder</designatorDropdown>
+
+    <defName>HemogenGrinder</defName>
+    <label>hemogen grinder</label>
+    <description>FIXME</description>
+    <thingClass>zed_0xff.HemogenGrinder.Building_HemogenGrinder</thingClass>
+    <graphicData>
+      <color>(255, 0, 0)</color>
+    </graphicData>
+    <comps Inherit="False">
+      <li Class="PipeSystem.CompProperties_Resource">
+        <pipeNet>VRE_HemogenNet</pipeNet>
+      </li>
+      <li Class="CompProperties_Flickable" />
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+    </comps>
+    <researchPrerequisites Inherit="False">
+      <li>Deathrest</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="HemogenGrinder">
+    <defName>HemogenMiniGrinder</defName>
+    <label>hemogen minigrinder</label>
+    <graphicData>
+      <drawSize>(2,2)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>175</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+    </statBases>
+    <size>(2,2)</size>
+    <costList>
+      <Steel>50</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <building>
+      <nutritionCostPerDispense>0.35</nutritionCostPerDispense>
+      <destroySound>BuildingDestroyed_Metal_Medium</destroySound>
+    </building>
+    <uiOrder>2211</uiOrder>
+    <uiIconScale>0.75</uiIconScale>
+  </ThingDef>
+
+  <ThingDef ParentName="HemogenGrinder">
+    <defName>HemogenMicroGrinder</defName>
+    <label>hemogen microgrinder</label>
+    <graphicData>
+      <drawSize>(1,1)</drawSize>
+    </graphicData>
+    <statBases>
+      <MaxHitPoints>40</MaxHitPoints>
+      <WorkToBuild>300</WorkToBuild>
+    </statBases>
+    <size>(1,1)</size>
+    <costList>
+      <Steel>25</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
+    </costList>
+    <building>
+      <nutritionCostPerDispense>0.4</nutritionCostPerDispense>
+      <destroySound>BuildingDestroyed_Metal_Small</destroySound>
+    </building>
+    <uiOrder>2210</uiOrder>
+    <uiIconScale>0.5</uiIconScale>
+  </ThingDef>
+</Defs>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>HemogenGrinder</name>
+  <author>zed_0xff</author>
+  <packageId>zed.0xff.HemogenGrinder</packageId>
+  <url>https://github.com/zed-0xff/RW-HemogenGrinder</url>
+  <supportedVersions>
+    <li>1.4</li>
+  </supportedVersions>
+  <description>FIXME
+
+[url=https://ko-fi.com/K3K81Z3W5][img]https://i.imgur.com/Utx6OIH.png[/img][/url]</description>
+  <modDependencies>
+    <li>
+      <packageId>VanillaExpanded.VNutrientE</packageId>
+      <displayName>Vanilla Nutrient Paste Expanded</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>vanillaracesexpanded.sanguophage</packageId>
+      <displayName>Vanilla Races Expanded - Sanguophage</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383</steamWorkshopUrl>
+    </li>
+    <li>
+      <packageId>NoSleep.Hemofungus</packageId>
+      <displayName>Hemofungus</displayName>
+      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>Ludeon.RimWorld</li>
+    <li>brrainz.harmony</li>
+    <li>OskarPotocki.VanillaFactionsExpanded.Core</li>
+    <li>VanillaExpanded.VNutrientE</li>
+    <li>vanillaracesexpanded.sanguophage</li>
+  </loadAfter>
+</ModMetaData>
