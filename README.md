@@ -1,5 +1,5 @@
-# HemogenGrinder
-[![HemogenGrinder](About/Preview.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2992032852)
+# Hemogen Grinder
+[![Hemogen Grinder](About/Preview.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2992032852)
 
 Adds 3 variants of grinders that can process [Hemofungus](https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237) into hemogen and push it to [VRE-S](https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383) hemogen network.
 
