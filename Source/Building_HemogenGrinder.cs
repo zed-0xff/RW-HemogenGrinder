@@ -1,7 +1,9 @@
+using HarmonyLib;
 using RimWorld;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using UnityEngine;
 using Verse;
 
@@ -12,86 +14,33 @@ namespace zed_0xff.HemogenGrinder;
 
 // original code copied from VNPE/Building_NutrientGrinder.cs (c) Oscar Potocki
 
-public class Building_HemogenGrinder : Building {
-        public CompPowerTrader powerComp;
-        public CompResource resourceComp;
-
+// need to inherit it from Building_NutrientGrinder for proper function of CompRegisterToGrinder
+public class Building_HemogenGrinder : Building_NutrientGrinder {
         private const int produceTicksNeeded = 400;
 
-        private List<Thing> cachedHoppers = new List<Thing>();
+        // only used in Tick() and it's completely overridden
         private Effecter effecter;
-        private int nextTick = -1;
+
+        static FieldInfo fi_cachedHoppers = AccessTools.Field(typeof(Building_NutrientGrinder), "cachedHoppers");
+        static FieldInfo fi_nextTick      = AccessTools.Field(typeof(Building_NutrientGrinder), "nextTick");
+
+        public List<Thing> CachedHoppers => (List<Thing>)fi_cachedHoppers.GetValue(this);
+        public int NextTick {
+            get { return (int)fi_nextTick.GetValue(this); }
+            set { fi_nextTick.SetValue(this, value); }
+        }
 
         public bool IsAcceptableFeedstock(ThingDef def){
             return def.defName == "RawHemofungus";
         }
 
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.Look(ref nextTick, "nextTick");
-        }
-
-        public override IEnumerable<Gizmo> GetGizmos()
-        {
-            foreach (Gizmo gizmo in base.GetGizmos())
-                yield return gizmo;
-
-            yield return BuildCopyCommandUtility.FindAllowedDesignator(ThingDefOf.Hopper);
-        }
-
-        public override string GetInspectString()
-        {
-            var builder = new StringBuilder();
-            builder.AppendLine(base.GetInspectString());
-
-            if (!this.IsSociallyProper(null, false))
-                builder.AppendLine((string)"InPrisonCell".Translate());
-
-            if (Prefs.DevMode)
-            {
-                builder.AppendLine($"{cachedHoppers.Count} connected hopper(s)\n");
-            }
-
-            return builder.ToString().Trim();
-        }
-
-        public void RegisterHopper(Thing hopper)
-        {
-            if (cachedHoppers == null)
-                cachedHoppers = new List<Thing>();
-
-            if (!cachedHoppers.Contains(hopper))
-                cachedHoppers.Add(hopper);
-        }
-
-        public override void SpawnSetup(Map map, bool respawningAfterLoad)
-        {
-            base.SpawnSetup(map, respawningAfterLoad);
-            powerComp = GetComp<CompPowerTrader>();
-            resourceComp = GetComp<CompResource>();
-
-            var adjCells = GenAdj.CellsAdjacentCardinal(this).ToList();
-            for (int i = 0; i < adjCells.Count; i++)
-            {
-                var cell = adjCells[i];
-                if (cell.GetFirstBuilding(map) is Building h && h.TryGetComp<CompRegisterToGrinder>() is CompRegisterToGrinder compRegisterToGrinder)
-                {
-                    this.RegisterHopper(h);
-                }
-            }
-
-            if (!respawningAfterLoad)
-                nextTick = Find.TickManager.TicksGame + produceTicksNeeded;
-        }
-
         public override void Tick()
         {
             var tick = Find.TickManager.TicksGame;
-            if (tick >= nextTick)
+            if (tick >= NextTick)
             {
-                nextTick = tick + produceTicksNeeded;
-                if (!powerComp.PowerOn || cachedHoppers.NullOrEmpty())
+                NextTick = tick + produceTicksNeeded;
+                if (!powerComp.PowerOn || CachedHoppers.NullOrEmpty())
                     return;
 
                 if (TryProduceHemogen() && effecter == null)
@@ -100,7 +49,7 @@ public class Building_HemogenGrinder : Building {
                     effecter.Trigger(this, new TargetInfo(Position, Map));
                 }
             }
-            else if (tick >= nextTick - 150 && effecter != null)
+            else if (tick >= NextTick - 150 && effecter != null)
             {
                 effecter?.Cleanup();
                 effecter = null;
@@ -110,19 +59,13 @@ public class Building_HemogenGrinder : Building {
                 effecter.EffectTick(this, new TargetInfo(Position, Map));
         }
 
-        public void UnregisterHopper(Thing hopper)
-        {
-            if (cachedHoppers.Contains(hopper))
-                cachedHoppers.Remove(hopper);
-        }
-
         private Thing FindFeedInAnyHopper()
         {
             // from VNPE_Fridge_Fix
-            for (int h = 0; h < cachedHoppers.Count; h++)
+            for (int h = 0; h < CachedHoppers.Count; h++)
             {
                 // fix #1: process all cells of hopper, mostly for 2x1 fridges, but 2x2 will work too :)
-                foreach( var cell in cachedHoppers[h].OccupiedRect() ){
+                foreach( var cell in CachedHoppers[h].OccupiedRect() ){
                     var thingList = cell.GetThingList(Map);
 
                     for (int t = 0; t < thingList.Count; ++t)
@@ -142,10 +85,10 @@ public class Building_HemogenGrinder : Building {
             var num = 0f;
 
             // from VNPE_Fridge_Fix
-            for (int h = 0; h < cachedHoppers.Count; h++)
+            for (int h = 0; h < CachedHoppers.Count; h++)
             {
                 // fix #1: process all cells of hopper, mostly for 2x1 fridges, but 2x2 will work too :)
-                foreach( var cell in cachedHoppers[h].OccupiedRect() ){
+                foreach( var cell in CachedHoppers[h].OccupiedRect() ){
                     var things = cell.GetThingList(map);
 
                     for (int t = 0; t < things.Count; t++)
