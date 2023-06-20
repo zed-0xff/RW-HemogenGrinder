@@ -31,7 +31,12 @@ public class Building_HemogenGrinder : Building_NutrientGrinder {
         }
 
         public bool IsAcceptableFeedstock(ThingDef def){
-            return def.defName == "RawHemofungus";
+            if( def == ThingDefOf.Meat_Human )
+                return true;
+            if( def.defName == "RawHemofungus" )
+                return true;
+
+            return false;
         }
 
         public override void Tick()
