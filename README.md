@@ -1,13 +1,18 @@
 # Hemogen Grinder
 [![Hemogen Grinder](About/Preview.png)](https://steamcommunity.com/sharedfiles/filedetails/?id=2992032852)
 
-Adds 3 variants of grinders that can process [Hemofungus](https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237) into hemogen and push it to [VRE-S](https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383) hemogen network.
+Adds 3 variants of grinders that can process varius source products into hemogen and push it to [VRE-S](https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383) hemogen network.
 
 Amount of hemogen produced is tied to nutrition value of source product, and smaller grinders are less efficient.
 
-TODO: add more source varieties. Pls write in comments what you'd like to see there.
+[VNPE Fridge Fix](https://steamcommunity.com/sharedfiles/filedetails/?id=2976541719) is built-in.
 
-[VNPE Fridge Fix](https://steamcommunity.com/sharedfiles/filedetails/?id=2976541719) built-in.
+## Accepted source products
+
+- [Hemofungus](https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237)
+- Human meat
+
+TODO: add more source varieties. Pls write in comments what you'd like to see here.
 
 ## Verified compatible/supported mods
 
