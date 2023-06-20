@@ -10,7 +10,7 @@
 
     <defName>HemogenGrinder</defName>
     <label>hemogen grinder</label>
-    <description>FIXME</description>
+    <description>A machine that synthesizes hemogen from organic feedstocks placed in adjacent hoppers.</description>
     <thingClass>zed_0xff.HemogenGrinder.Building_HemogenGrinder</thingClass>
     <graphicData>
       <color>(255, 0, 0)</color>

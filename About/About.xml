@@ -7,9 +7,22 @@
   <supportedVersions>
     <li>1.4</li>
   </supportedVersions>
-  <description>FIXME
+  <description><![CDATA[<color=#1a8bff><b>HemogenGrinder</b></color>
 
-[url=https://ko-fi.com/K3K81Z3W5][img]https://i.imgur.com/Utx6OIH.png[/img][/url]</description>
+Adds 3 variants of grinders that can process <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237">Hemofungus</a> into hemogen and push it to <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383">VRE-S</a> hemogen network.
+Amount of hemogen produced is tied to nutrition value of source product, and smaller grinders are less efficient.
+TODO: add more source varieties. Pls write in comments what you'd like to see there.
+<a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2976541719">VNPE Fridge Fix</a> built-in.
+
+<color=#1a8bff><b>Verified compatible/supported mods</b></color>
+  • <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237">Hemofungus</a>
+  • <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383">Vanilla Races Expanded - Sanguophage</a>
+  • <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2920385763">Vanilla Nutrient Paste Expanded</a>
+
+https://github.com/zed-0xff/RW-HemogenGrinder
+
+<color=#1a8bff><b>Support me</b></color>
+https://ko-fi.com/K3K81Z3W5 or https://www.patreon.com/zed_0xff]]></description>
   <modDependencies>
     <li>
       <packageId>VanillaExpanded.VNutrientE</packageId>
