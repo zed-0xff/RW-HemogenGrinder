@@ -118,14 +118,19 @@ public class Building_HemogenGrinder : Building {
 
         private Thing FindFeedInAnyHopper()
         {
+            // from VNPE_Fridge_Fix
             for (int h = 0; h < cachedHoppers.Count; h++)
             {
-                var thingList = cachedHoppers[h].Position.GetThingList(Map);
-                for (int t = 0; t < thingList.Count; ++t)
-                {
-                    Thing thing = thingList[t];
-                    if (IsAcceptableFeedstock(thing.def))
-                        return thing;
+                // fix #1: process all cells of hopper, mostly for 2x1 fridges, but 2x2 will work too :)
+                foreach( var cell in cachedHoppers[h].OccupiedRect() ){
+                    var thingList = cell.GetThingList(Map);
+
+                    for (int t = 0; t < thingList.Count; ++t)
+                    {
+                        Thing thing = thingList[t];
+                        if (IsAcceptableFeedstock(thing.def))
+                            return thing;
+                    }
                 }
             }
             return null;
@@ -136,22 +141,25 @@ public class Building_HemogenGrinder : Building {
             var map = Map;
             var num = 0f;
 
+            // from VNPE_Fridge_Fix
             for (int h = 0; h < cachedHoppers.Count; h++)
             {
-                var things = cachedHoppers[h].Position.GetThingList(map);
+                // fix #1: process all cells of hopper, mostly for 2x1 fridges, but 2x2 will work too :)
+                foreach( var cell in cachedHoppers[h].OccupiedRect() ){
+                    var things = cell.GetThingList(map);
 
-                for (int t = 0; t < things.Count; t++)
-                {
-                    var thing = things[t];
-                    if (IsAcceptableFeedstock(thing.def))
+                    for (int t = 0; t < things.Count; t++)
                     {
-                        num += thing.stackCount * thing.GetStatValue(StatDefOf.Nutrition);
-                        break;
+                        var thing = things[t];
+                        if (IsAcceptableFeedstock(thing.def))
+                        {
+                            num += thing.stackCount * thing.GetStatValue(StatDefOf.Nutrition);
+                            // fix #2: replace break with sufficiency check
+                            if (num >= def.building.nutritionCostPerDispense)
+                                return true;
+                        }
                     }
                 }
-
-                if (num >= def.building.nutritionCostPerDispense)
-                    return true;
             }
 
             return false;
