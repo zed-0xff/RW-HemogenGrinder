@@ -38,11 +38,6 @@ https://ko-fi.com/K3K81Z3W5 or https://www.patreon.com/zed_0xff]]></description>
       <displayName>Vanilla Races Expanded - Sanguophage</displayName>
       <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2963116383</steamWorkshopUrl>
     </li>
-    <li>
-      <packageId>NoSleep.Hemofungus</packageId>
-      <displayName>Hemofungus</displayName>
-      <steamWorkshopUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2882143237</steamWorkshopUrl>
-    </li>
   </modDependencies>
   <loadAfter>
     <li>Ludeon.RimWorld</li>
